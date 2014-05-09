@@ -25,6 +25,19 @@ CKEDITOR.dialog.add( 'audio', function ( editor )
 		audio[id] = this.getValue();
 	}
 
+	function commitBool( audioNode, extraStyles )
+	{
+		var value=this.getValue();
+		if (value == 'false') {
+			audioNode.removeAttribute(this.id);
+		} else {
+			audioNode.setAttribute(this.id, value);
+		}
+		if (!value) {
+			return;
+		}	
+	}
+
 	function loadValue( audioNode )
 	{
 		if ( audioNode )
@@ -46,6 +59,14 @@ CKEDITOR.dialog.add( 'audio', function ( editor )
 		if (!audio)
 			return;
 		this.setValue( audio[ id ] );
+	}
+
+	function loadBool( audioNode )
+	{
+		if ( audioNode ) {
+			if (audioNode.getAttribute( this.id )) this.setValue( audioNode.getAttribute( this.id ) );
+			else this.setValue('false');
+		}
 	}
 
 	function generateId()
@@ -154,10 +175,7 @@ CKEDITOR.dialog.add( 'audio', function ( editor )
 			}
 			else
 			{
-				// Insert it in a div
-				var div = new CKEDITOR.dom.element( 'DIV', editor.document );
-				editor.insertElement( div );
-				div.append( newFakeImage );
+				editor.insertElement( newFakeImage );
 			}
 		},
 		onHide : function()
@@ -220,11 +238,11 @@ CKEDITOR.dialog.add( 'audio', function ( editor )
 								id : 'type0',
 								label : lang.sourceType,
 								type : 'select',
-								'default' : 'audio/mp4',
+								'default' : 'audio/mpeg',
 								items :
 								[
-									[ 'MP4', 'audio/mp4' ],
-									[ 'WebM', 'audio/webm' ]
+									[ 'mp3', 'audio/mpeg' ],
+									[ 'wav', 'audio/wav' ]
 								],
 								commit : commitSrc,
 								setup : loadSrc
@@ -259,15 +277,61 @@ CKEDITOR.dialog.add( 'audio', function ( editor )
 								id : 'type1',
 								label : lang.sourceType,
 								type : 'select',
-								'default':'audio/webm',
+								'default':'audio/wav',
 								items :
 								[
-									[ 'MP4', 'audio/mp4' ],
-									[ 'WebM', 'audio/webm' ]
+									[ 'mp3', 'audio/mpeg' ],
+									[ 'wav', 'audio/wav' ]
 								],
 								commit : commitSrc,
 								setup : loadSrc
 							}]
+					},
+
+					{
+						type : 'hbox',
+						widths: ['', '', '80%'],
+						children : [
+							{
+								type : 'select',
+								id : 'autoplay',
+								label : 'Autoplay',
+								'default':'autoplay',
+								items :
+								[
+									[ 'Yes', 'autoplay' ],
+									[ 'No', 'false' ]
+								],
+								commit : commitBool,
+								setup : loadBool
+							},
+							{
+								type : 'select',
+								id : 'loop',
+								label : 'Loop',
+								'default':'loop',
+								items :
+								[
+									[ 'Yes', 'loop' ],
+									[ 'No', 'false' ]
+								],
+								commit : commitBool,
+								setup : loadBool
+							},
+							{
+								type : 'select',
+								id : 'controls',
+								label : 'Controls',
+								'default':'controls',
+								items :
+								[
+									[ 'Active', 'controls' ],
+									[ 'Hidden', 'false' ]
+								],
+								commit : commitBool,
+								setup : loadBool
+							}
+						]
 					}
 				]
 			}
