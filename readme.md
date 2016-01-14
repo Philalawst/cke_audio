@@ -21,4 +21,4 @@ CKEDITOR.editorConfig = function( config )
 ```
 
 ### About
-This is only an adaptation of Video plugin for CKEditor created by Alfonso Mart�nez de Lizarrondo 
+This is only an adaptation of Video plugin for CKEditor created by Alfonso Martínez de Lizarrondo
