@@ -13,7 +13,7 @@ CKEDITOR.editorConfig = function( config )
 	config.toolbar = [ 
 	['Templates', 'Styles','Format','Font','FontSize','TextColor','BGColor','Maximize','Image'], 
 	['Source'], 
-	['Bold','Italic','Underline','Strike','-','Subscript','Superscript','-',**'audio'**], 
+	['Bold','Italic','Underline','Strike','-','Subscript','Superscript','-',**'Audio'**],
 	['Table','HorizontalRule'], 
 	['NumberedList','BulletedList','-','Outdent','Indent','Blockquote']
 	] 
@@ -21,4 +21,4 @@ CKEDITOR.editorConfig = function( config )
 ```
 
 ### About
-This is only an adaptation of Video plugin for CKEditor created by Alfonso Martínez de Lizarrondo 
+This is only an adaptation of Video plugin for CKEditor created by Alfonso MartÃ­nez de Lizarrondo
